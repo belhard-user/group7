@@ -12,12 +12,15 @@ class DbController extends Controller
 {
     public function select()
     {
-        $tests = DB::table('tests')->where(function($query){
+        /*$tests = DB::table('tests')->where(function($query){
             $query->where('email', 't')->where('age', 100);
         })->get();
-        \Debugbar::info($tests);
+        \Debugbar::info($tests);*/
 
-        return view('db.db');
+        $users = DB::table('tests')->select('email', 'id')->paginate(10);
+        $allUser = DB::table('tests')->count();
+
+        return view('db.users', compact('users', 'allUser'));
     }
 
     public function delete()
