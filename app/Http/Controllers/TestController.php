@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
-//use Illuminate\Http\Request;
+use App\Http\Requests\TestRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
 //use App\Http\Requests;
 
 
@@ -54,5 +57,34 @@ class TestController extends Controller
     public function test($name, $age)
     {
 
+    }
+
+    public function forms()
+    {
+        $validator = \Validator::make(['name' => ''], ['name' => 'required']);
+
+        if($validator->fails()){
+            dd('error');
+        }else{
+            dd('ok');
+        }
+
+        return view('test');
+    }
+
+    public function postForms(TestRequest $request)
+    {
+        /*$this->validate(['name' => 'john'], [
+            'email' => 'required|email|unique:tests',
+            'age' => 'required|integer|between:18,50',
+            'gender' => 'in:Mr,Ms',
+            'about' => 'required|min:10|max:255'
+            // 'file' => 'file'
+        ]);*/
+        \DB::table('tests')->insert(
+            array_merge($request->except('_token'), ['updated_at' => new \DateTime(), 'created_at' => new \DateTime()])
+        );
+
+        return redirect()->route('form');
     }
 }

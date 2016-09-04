@@ -1,6 +1,8 @@
 <?php
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
+Route::post('form', ['as' => 'post.form', 'uses' => 'TestController@postForms']);
+Route::get('form', ['as' => 'form', 'uses' => 'TestController@forms']);
 
 
 Route::group(['prefix' => 'db'], function($route){

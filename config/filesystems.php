@@ -62,6 +62,11 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'test' => [
+            'driver' => 'local',
+            'root' => storage_path('belhard_trash'),
+        ],
+
     ],
 
 ];
