@@ -16,7 +16,7 @@ class TestSeed extends Seeder
 
         $faker = Factory::create();
 
-        for($i = 0; $i < 1000; $i++){
+        for($i = 0; $i < 10; $i++){
             $date = $faker->dateTimeBetween();
 
             DB::table('tests')->insert([

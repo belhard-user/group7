@@ -10,16 +10,11 @@ class HomeController extends Controller
 {
     public function home()
     {
-        $names = [
-            'Neo',
-            'Morpheus',
-            'Tank',
-            'Dozer',
-            'Smith',
-            'Trinity',
-            'Pifia'
-        ];
-        \Debugbar::error($names);
-        return view('home.index');
+        $lastNews = \DB::table('news')
+            ->orderBy('id', 'DESC')
+            ->limit(3)
+            ->get();
+
+        return view('home.index', compact('lastNews'));
     }
 }

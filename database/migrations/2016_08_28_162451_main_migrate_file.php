@@ -73,7 +73,7 @@ class MainMigrateFile extends Migration
             $table->decimal('height', 3, 2);
             $table->integer('weight');
             $table->decimal('price', 7, 2);
-            $table->decimal('special_price', 5, 2);
+            $table->decimal('special_price', 7, 2)->nullable();
 
             $table->timestamps();
         });
