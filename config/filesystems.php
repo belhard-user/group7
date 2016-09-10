@@ -62,9 +62,9 @@ return [
             'bucket' => 'your-bucket',
         ],
 
-        'test' => [
+        'orders' => [
             'driver' => 'local',
-            'root' => storage_path('belhard_trash'),
+            'root' => public_path(),
         ],
 
     ],

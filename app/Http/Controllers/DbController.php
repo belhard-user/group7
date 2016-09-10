@@ -64,4 +64,17 @@ class DbController extends Controller
         ]);*/
         return view('db.db');
     }
+
+    public function model()
+    {
+        /*$test = \App\Test::findOrFail(212321);
+
+        echo $test->email;
+
+        $test->each(function($item){
+            echo $item->email . '<hr>';
+        });*/
+
+        // dd($test);
+    }
 }
