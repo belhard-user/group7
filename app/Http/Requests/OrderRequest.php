@@ -24,12 +24,12 @@ class OrderRequest extends FormRequest
     public function rules()
     {
         $rules = [
-//            'age' => 'required|integer',
-//            'weight' => 'required|numeric',
-//            'height' => 'required|numeric',
-//            'name' => 'required',
-//            'price' => 'required|numeric',
-//            'special_price' => 'required|numeric',
+            'age' => 'required|integer',
+            'weight' => 'required|numeric',
+            'height' => 'required|numeric|max:9',
+            'name' => 'required',
+            'price' => 'required|numeric|max:100000',
+            'special_price' => 'required|numeric|max:100000',
         ];
 
         return $rules;

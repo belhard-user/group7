@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\OrderRequest;
+use App\My\AddPhoto;
 use App\Order;
 use Illuminate\Http\Request;
 
@@ -18,6 +19,7 @@ class AdminOrderController extends Controller
             foreach ($item->image as $image){
                 echo "<img width='200' src='/".$image->path."'>";
             }
+            echo "<a href='".route('order.edit', ['order' => $item->id])."'>@{$item->name}</a>";
             echo "<hr>";
         });
     }
@@ -30,18 +32,7 @@ class AdminOrderController extends Controller
     {
         $order = Order::create($request->all());
 
-        if($request->hasFile('images')){
-            foreach ($request->file('images') as $item) {
-                $order->image()->create([
-                    'path' => $item->store('orders', 'orders')
-                ]);
-
-                /*\App\Image::create([
-                    'order' => $order->id,
-                    'path' => $item->store('orders', 'orders')
-                ]);*/
-            }
-        }
+        (new AddPhoto($order, $request))->save();
         // $order = Order::firstOrNew($request->except('_token')); $order->save()
         // $order = Order::firstOrCreate($request->except('_token'));
 
@@ -58,7 +49,40 @@ class AdminOrderController extends Controller
         $order->special_price = $request->input('special_price');
 
         $order->save();*/
+        setFlash('Запись создалась');
+        return redirect()->back();
+        // return redirect()->route('order.index');
+    }
+
+    public function edit(\App\Order $order)
+    {
+        return view('admin.order.edit', compact('order'));
+    }
+
+    public function upgrade(\App\Order $order, OrderRequest $request)
+    {
+        $order->update($request->all());
+
+        (new AddPhoto($order, $request))->save();
+
+        setFlash('Товарищ '.$order->name.' по прежнему не продан!!!');
 
         return redirect()->back();
+        // return redirect()->route('order.index');
+    }
+
+    /**
+     * @param Order $order
+     * @param OrderRequest $request
+     */
+    private function addPhotoToOrder(\App\Order $order, OrderRequest $request)
+    {
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $item) {
+                $order->image()->create([
+                    'path' => $item->store('orders', 'orders')
+                ]);
+            }
+        }
     }
 }

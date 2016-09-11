@@ -55,6 +55,16 @@ class RouteServiceProvider extends ServiceProvider
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {
+
+            /*$router->bind('order', function($value){
+                $value = strtolower($value);
+
+                if($value{0} == '@'){
+                    $value = substr($value, 1);
+                }
+                return \App\Order::where('name', $value)->first();
+            });*/
+
             require base_path('routes/web.php');
         });
     }

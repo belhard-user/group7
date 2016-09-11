@@ -23,6 +23,8 @@ Route::group(['prefix' => 'admin-panel', 'namespace' => 'Admin'], function($rout
         $route->get('index', ['uses' => 'AdminOrderController@index', 'as' => 'order.index']);
         $route->get('create', ['uses' => 'AdminOrderController@create', 'as' => 'order.create']);
         $route->post('store', ['uses' => 'AdminOrderController@store', 'as' => 'order.store']);
+        $route->get('{order}/edit', ['uses' => 'AdminOrderController@edit', 'as' => 'order.edit']);
+        $route->put('{order}/upgrade', ['uses' => 'AdminOrderController@upgrade', 'as' => 'order.upgrade']);
     });
 });
 
