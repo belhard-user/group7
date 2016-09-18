@@ -7,7 +7,13 @@
                 <div class="col-md-7 col-md-pull-3 col-md-offset-5">
                     <p class="search-results-count">About 94 700 000 (0.39 sec.) results</p>
                     <section class="search-result-item">
-                        <a class="image-link" href="#"><img class="image" src="http://bootdey.com/img/Content/avatar/avatar1.png"></a>
+                        <a class="image-link" href="#">
+                            @if( ! $order->image->isEmpty() )
+                                <img class="image" src="/{{ $order->image[0]->path }}">
+                            @else
+                                <img class="image" src="http://bootdey.com/img/Content/avatar/avatar1.png">
+                            @endif
+                        </a>
                         <div class="search-result-item-body">
                             <div class="row">
                                 <div class="col-sm-9">
@@ -22,7 +28,17 @@
                                     @else
                                         <p class="value3 mt-sm">{{ $order->price }}</p>
                                     @endif
-                                    <p class="fs-mini text-muted">PER WEEK</p><a class="btn btn-primary btn-info btn-sm" href="{{ route('slaves.order', ['id' => $order->id]) }}">Изучить</a>
+                                    <p class="fs-mini text-muted">PER WEEK</p>
+                                        <a class="btn btn-primary btn-info btn-sm" href="{{ route('order.create') }}">Создать</a>
+                                        <a class="btn btn-primary btn-info btn-sm" href="{{ route('order.edit', ['id' => $order->id]) }}">Изменить</a>
+                                        <a class="btn btn-primary btn-info btn-sm" href="{{ route('slaves.order', ['id' => $order->id]) }}">Изучить</a>
+                                    <div>
+                                        @unless($order->categories->isEmpty())
+                                            @foreach($order->categories as $cat)
+                                                <span class="label label-default">{{ $cat->title }}</span>
+                                            @endforeach
+                                        @endunless
+                                    </div>
                                 </div>
                             </div>
                         </div>

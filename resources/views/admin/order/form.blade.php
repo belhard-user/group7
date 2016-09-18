@@ -29,6 +29,11 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('cat_list', 'Категории') !!}
+    {!! Form::select('cat_list[]', \App\Category::getList(), null, ['multiple', 'class' => 'form-control']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('images', 'Images') !!}
     {!! Form::file('images[]', ['multiple']) !!}
 </div>

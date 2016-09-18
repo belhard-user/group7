@@ -25,12 +25,17 @@ class AdminOrderController extends Controller
     }
     public function create()
     {
-        return view('admin.order.create');
+        return view('admin.order.create', [
+            'order' => new Order()
+        ]);
     }
 
     public function store(OrderRequest $request)
     {
+        // return $request->input('category_id');
         $order = Order::create($request->all());
+
+        $order->categories()->attach($request->input('cat_list'));
 
         (new AddPhoto($order, $request))->save();
         // $order = Order::firstOrNew($request->except('_token')); $order->save()
@@ -62,6 +67,8 @@ class AdminOrderController extends Controller
     public function upgrade(\App\Order $order, OrderRequest $request)
     {
         $order->update($request->all());
+
+        $order->categories()->sync($request->input('cat_list'));
 
         (new AddPhoto($order, $request))->save();
 

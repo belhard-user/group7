@@ -15,6 +15,10 @@ Route::group(['prefix' => 'db'], function($route){
 
 Route::group(['namespace' => 'Orders', 'prefix' => 'slaves'], function($route){
     $route->get('list', ['uses' => 'OrderController@orderList', 'as' => 'slaves.list']);
+    $route->get('category', ['uses' => 'OrderController@category', 'as' => 'slaves.category']);
+    $route->get('photos', ['uses' => 'OrderController@photos', 'as' => 'slaves.photos']);
+    $route->get('{image}/order', ['uses' => 'OrderController@photos', 'as' => 'slaves.order']);
+    $route->get('{category}/category-product', ['uses' => 'OrderController@categoryProducts', 'as' => 'slaves.category_products']);
     $route->get('order/{id}/show', ['uses' => 'OrderController@order', 'as' => 'slaves.order']);
 });
 

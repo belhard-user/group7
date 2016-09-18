@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
@@ -15,5 +16,15 @@ class Order extends Model
     public function image() // image_id
     {
         return $this->hasMany(\App\Image::class);
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
+
+    public function getCatListAttribute()
+    {
+        return $this->categories()->pluck('id')->toArray();
     }
 }
