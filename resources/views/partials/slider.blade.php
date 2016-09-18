@@ -1,3 +1,4 @@
+@if(Request::path() == '/')
 <div class="container">
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <!-- Indicators -->
@@ -48,3 +49,4 @@
         </a>
     </div><!-- /.carousel -->
 </div>
+@endif

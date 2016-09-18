@@ -29,7 +29,7 @@
                                         <p class="value3 mt-sm">{{ $order->price }}</p>
                                     @endif
                                     <p class="fs-mini text-muted">PER WEEK</p>
-                                        <a class="btn btn-primary btn-info btn-sm" href="{{ route('order.create') }}">Создать</a>
+                                        <a class="btn btn-primary btn-info btn-sm" href="{{ route('cart', ['id' => $order->id]) }}">Добавить в корзину</a>
                                         <a class="btn btn-primary btn-info btn-sm" href="{{ route('order.edit', ['id' => $order->id]) }}">Изменить</a>
                                         <a class="btn btn-primary btn-info btn-sm" href="{{ route('slaves.order', ['id' => $order->id]) }}">Изучить</a>
                                     <div>

@@ -27,24 +27,7 @@
                     <a class="navbar-brand" href="#">Project name</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Home</a></li>
-                        <li><a href="{{ route('slaves.list') }}">Магаз</a></li>
-                        <li><a href="{{ route('slaves.category') }}">Категории</a></li>
-                        <li><a href="{{ route('slaves.photos') }}">Фотки</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-
-                                @if (Auth::guest())
-                                    <li><a href="{{ url('/login') }}">Login</a></li>
-                                    <li><a href="{{ url('/register') }}">Register</a></li>
-                                @else
-                                    <li><a href="{{ url('/logout') }}">Выход</a></li>
-                                @endif
-                            </ul>
-                        </li>
-                    </ul>
+                    @include('partials.nav')
                 </div>
             </div>
         </nav>

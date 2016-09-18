@@ -27,4 +27,9 @@ class Order extends Model
     {
         return $this->categories()->pluck('id')->toArray();
     }
+    
+    public function getPrice()
+    {
+        return ($this->special_price) ? $this->special_price : $this->price;
+    }
 }

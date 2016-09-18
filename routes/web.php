@@ -1,4 +1,8 @@
 <?php
+// echo T::getName();
+
+Route::get('cart/{order}', ['uses' => 'CartController@add', 'as' => 'cart'])->where('order', '\d+');
+Route::get('cart/checkout', ['uses' => 'CartController@checkout', 'as' => 'checkout']);
 
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@home']);
 Route::post('form', ['as' => 'post.form', 'uses' => 'TestController@postForms']);
